@@ -1,5 +1,4 @@
-﻿
-using Iot.Device.Mfrc522;
+﻿using Iot.Device.Mfrc522;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PollerBox.Features.SoundPlayer.SignalEmitter;

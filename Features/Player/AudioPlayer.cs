@@ -4,12 +4,9 @@ using PollerBox.Features.SoundPlayer.SignalEmitter;
 namespace PollerBox.Features.Player;
 internal class AudioPlayer : BackgroundService
 {
-	private readonly IList<ISoundPlayerSignalEmitter> _signalEmitters;
-
 	public AudioPlayer(IEnumerable<ISoundPlayerSignalEmitter> signalEmitters)
 	{
-		_signalEmitters = signalEmitters.ToList();
-		foreach (var signalEmitter in _signalEmitters)
+		foreach (var signalEmitter in signalEmitters)
 		{
 			signalEmitter.EmitSignal += SignalEmitter_EmitSignal;
 			signalEmitter.Disposed += SignalEmitter_Disposed;
@@ -39,7 +36,6 @@ internal class AudioPlayer : BackgroundService
 		}
 		signalEmitter.EmitSignal -= SignalEmitter_EmitSignal;
 		signalEmitter.Disposed -= SignalEmitter_Disposed;
-		_signalEmitters.Remove(signalEmitter);
 	}
 
 }
