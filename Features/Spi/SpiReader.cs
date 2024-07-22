@@ -1,15 +1,17 @@
 ﻿using Iot.Device.Mfrc522;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PollerBox.Features.SoundPlayer.SignalEmitter;
+using PollerBox.Features.SignalEmitter;
 
 namespace PollerBox.Features.Spi;
 
 internal class SpiReader(ILogger<SpiReader> logger, MfRc522 mfRc522)
 	: BackgroundService, ISoundPlayerSignalEmitter
 {
-	public event EventHandler<(SoundPlayerSignal signal, string? data)>? EmitSignal;
+	public event EventHandler<Signal>? EmitSignal;
 	public event EventHandler? Disposed;
+
+	private bool _cardPresentLastCheck = false;
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
@@ -28,6 +30,18 @@ internal class SpiReader(ILogger<SpiReader> logger, MfRc522 mfRc522)
 					var isPresent = mfRc522.IsCardPresent(atqa);
 					if (!isPresent)
 					{
+						if (_cardPresentLastCheck)
+						{
+							EmitSignal?.Invoke(this, new(SoundPlayerSignal.CardRemoved, null));
+							_cardPresentLastCheck = false;
+						}
+						continue;
+					}
+					logger.LogInformation("Card is present");
+
+					if (_cardPresentLastCheck)//TODO: doesnt work yet
+					{
+						// Card is still present, no need to read again
 						continue;
 					}
 
@@ -37,9 +51,11 @@ internal class SpiReader(ILogger<SpiReader> logger, MfRc522 mfRc522)
 					{
 						continue;
 					}
+					logger.LogInformation("Card read {id}", BitConverter.ToString(card.NfcId));
 
 					//notify service over new card read
-					EmitSignal?.Invoke(this, (SoundPlayerSignal.CardRead, BitConverter.ToString(card.NfcId)));
+					EmitSignal?.Invoke(this, new(SoundPlayerSignal.CardRead, BitConverter.ToString(card.NfcId)));
+					_cardPresentLastCheck = true;
 
 				}
 				catch (TaskCanceledException)
