@@ -40,6 +40,7 @@ internal class AudioStateContainer : IAudioStateContainer
 			if (_nextAudioFilename != null)
 			{
 				next = _nextAudioFilename;
+				_nextAudioFilename = null;
 				return true;
 			}
 			next = null;

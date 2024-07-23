@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using PollerBox.Features.Audio;
+﻿using PollerBox.Features.Audio;
 using PollerBox.Features.Filename;
+using PollerBox.Features.SignalEmitter;
 using PollerBox.Features.StateContainer;
 
 namespace PollerBox.Features.SignalHandler;

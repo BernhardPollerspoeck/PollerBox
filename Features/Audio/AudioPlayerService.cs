@@ -46,6 +46,7 @@ internal class AudioPlayerService : IHostedService
 	private void Player_PlaybackFinished(object? sender, EventArgs e)
 	{
 		_logger.LogInformation("Playback finished");
+		_audioStateContainer.SetIsPlaying(false);
 		if (_audioStateContainer.TryGetNextAudio(out var next))
 		{
 			_logger.LogInformation("Playing next audio");
