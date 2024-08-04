@@ -1,0 +1,5 @@
+services:
+  pollerbox:
+    image: docker.qsp.app/smart_worker
+    ports:
+      - "8080:8080"
