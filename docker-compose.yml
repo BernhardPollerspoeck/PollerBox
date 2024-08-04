@@ -1,5 +1,5 @@
 services:
   PollerBox:
-    image: docker.qsp.app/smart_worker
+    image: bernhardpollerspoeck/pollerbox:latest
     ports:
       - "8080:8080"
