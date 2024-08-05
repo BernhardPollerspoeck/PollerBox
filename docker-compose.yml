@@ -4,5 +4,8 @@ services:
   PollerBox:
     restart: always
     image: bernhardpollerspoeck/pollerbox:latest
+    devices:
+      - "/dev/gpiomem:/dev/gpiomem"
+      - "/dev/mem:/dev/mem"
     ports:
       - "8080:8080"
