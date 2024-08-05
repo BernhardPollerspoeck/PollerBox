@@ -6,7 +6,6 @@ services:
     image: bernhardpollerspoeck/pollerbox:latest
     ports:
       - "8080:8080"
-    devices:
-      - "/dev/mem:/dev/mem"
-      - "/dev/gpiomem:/dev/gpiomem"
-    privileged: true
+    volumes:
+      - /sys/class/gpio:/sys/class/gpio
+      - /dev:/dev
