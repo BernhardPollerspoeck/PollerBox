@@ -3,9 +3,10 @@ version: '3.1'
 services:
   PollerBox:
     restart: always
-    image: bernhardpollerspoeck/pollerbox:latest    
-    privileged: true
+    image: bernhardpollerspoeck/pollerbox:latest
     ports:
       - "8080:8080"
-    volumes:
-      - /dev/gpiomem:/dev/gpiomem
+    devices:
+      - "/dev/mem:/dev/mem"
+      - "/dev/gpiomem:/dev/gpiomem"
+    privileged: true
