@@ -18,4 +18,6 @@ RUN dotnet publish "./PollerBox.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY setup/asound.conf /etc/asound.conf
+RUN apt-get update && apt-get install -y mpg123 && rm -rf /var/lib/apt/lists/* 
 ENTRYPOINT ["dotnet", "PollerBox.dll"]
