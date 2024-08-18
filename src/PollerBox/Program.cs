@@ -4,13 +4,13 @@ using PollerBox.Features.Spi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorComponents()
-	.AddInteractiveServerComponents();
+builder.Services
+    .AddRazorComponents()
+    .AddInteractiveServerComponents();
 
 if (Environment.GetEnvironmentVariable("POLLER_BOX_USE_SPI") == "true")
 {
-	builder.AddSpiReader();
+    builder.AddSpiReader();
 }
 builder.AddAudioPlayer();
 
@@ -18,28 +18,19 @@ builder.AddAudioPlayer();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-	.AddInteractiveServerRenderMode();
-
-//app.MapPost(
-//	"/play/{cardId}",
-//	async (
-//		string cardId,
-//		[FromKeyedServices(SoundPlayerSignal.CardRead)] ISignalHandler signalHandler) =>
-//	{
-//		await signalHandler.HandleSignal(cardId);
-//		return Results.Ok();
-//	});
-
+    .AddInteractiveServerRenderMode();
 
 app.Run();
-//gpio 26 / 20
+
+
+//TODO: volume via gpio 26 / 20
+//TODO: mount files directory
