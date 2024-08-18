@@ -21,3 +21,13 @@ sudo apt-get install docker-compose
 ```
 curl -L -o docker-compose.yml https://raw.githubusercontent.com/BernhardPollerspoeck/PollerBox/master/docker-compose.yml
 ```
+
+docker build . -t bernhardpollerspoeck/pollerbox:latest
+
+
+notes:
+amixer scontrols
+amixer set PCM 50%
+
+
+

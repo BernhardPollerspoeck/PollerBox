@@ -4,8 +4,11 @@ services:
   PollerBox:
     restart: always
     image: bernhardpollerspoeck/pollerbox:latest
+    privileged: true
     ports:
       - "8080:8080"
     volumes:
-      - /sys/class/gpio:/sys/class/gpio
+      - /sys:/sys
+      - /etc:/etc
       - /dev:/dev
+    user: root
