@@ -7,8 +7,9 @@ services:
     privileged: true
     ports:
       - "8080:8080"
-    volumes:
-      - /sys:/sys
-      - /etc:/etc
-      - /dev:/dev
     user: root
+    devices:
+      - "/dev/snd:/dev/snd"
+    environment:
+      - AUDIODEV=hw:1,0
+      - POLLER_BOX_USE_SPI=true

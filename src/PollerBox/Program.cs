@@ -8,8 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 
-
-builder.AddSpiReader();
+if (Environment.GetEnvironmentVariable("POLLER_BOX_USE_SPI") == "true")
+{
+	builder.AddSpiReader();
+}
 builder.AddAudioPlayer();
 
 
