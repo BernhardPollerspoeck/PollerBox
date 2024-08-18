@@ -1,33 +1,30 @@
 
 
-## Setup 
+# Setup 
 
-- Check for Docker and Docker Compose
-```bash
-docker --version
-docker-compose --version
-```
-- In case Docker is not found install it
-```bash
-sudo apt-get update
-sudo apt-get install docker.io
-```
-- In case Docker Compose is not found install it
-```bash
-sudo apt-get update
-sudo apt-get install docker-compose
-```
-- Get Docker Compose file
+---
+
+### Get Docker Compose file
 ```
 curl -L -o docker-compose.yml https://raw.githubusercontent.com/BernhardPollerspoeck/PollerBox/master/docker-compose.yml
 ```
 
+
 docker build . -t bernhardpollerspoeck/pollerbox:latest
+docker push bernhardpollerspoeck/pollerbox
 
+---
 
-notes:
-amixer scontrols
-amixer set PCM 50%
+### Configure the docker-compose.yml file to your needs
+Set the audio device to your needs. Run `arecord -l` to get a list of available audio devices. 
+```yaml
+AUDIODEV=hw:1,0 
+```
 
+---
 
+### Start the PollerBox
+```
+docker-compose up -d
+```
 
