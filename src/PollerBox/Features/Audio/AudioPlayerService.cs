@@ -19,7 +19,9 @@ internal class AudioPlayerService(
         {
             logger.LogWarning("No SPI card handler found");
         }
-        return player.Play(Constants.STARTUP_AUDIO);
+        return Environment.GetEnvironmentVariable("POLLER_BOX_PLAY_STARTUP") == "true"
+            ? player.Play(Constants.STARTUP_AUDIO)
+            : Task.CompletedTask;
     }
     public Task StopAsync(CancellationToken cancellationToken)
     {

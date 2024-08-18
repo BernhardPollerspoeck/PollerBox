@@ -13,3 +13,4 @@ services:
     environment:
       - AUDIODEV=hw:1,0
       - POLLER_BOX_USE_SPI=true
+      - POLLER_BOX_PLAY_STARTUP=true
