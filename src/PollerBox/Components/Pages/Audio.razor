@@ -1,36 +1,42 @@
 ﻿@page "/audio"
 @rendermode InteractiveServer
 
-<PageTitle>audio</PageTitle>
+<PageTitle>Audio</PageTitle>
 
-<p>Title:</p>
-<input type="text" @bind="_title" />
+<div class="container mt-4">
+    <div class="form-group">
+        <label for="titleInput">Titel:</label>
+        <input type="text" id="titleInput" class="form-control" @bind="_title" />
+    </div>
 
-<br />
+    <div class="form-group mt-3">
+        <button class="btn btn-primary" onclick="document.getElementById('picker').click()">Datei wählen</button>
+        <InputFile id="picker" hidden OnChange="@OnInputFileChange" />
+        <input type="text" class="form-control mt-2" value="@_selectedFileName" readonly />
+    </div>
 
-<br />
+    <div class="form-group mt-3">
+        <h2 class="text-danger">@_error</h2>
+    </div>
 
-<button onclick="document.getElementById('picker').click()">Datei wählen</button>
-<InputFile id="picker" hidden OnChange="@OnInputFileChange" />
+    <div class="form-group mt-3">
+        <button class="btn btn-success" @onclick="Save" disabled=@_canNotUpload>Hochladen</button>
+    </div>
 
-<input type="text" value="@_selectedFileName" readonly />
+    <hr class="my-4" />
 
-<h2>@_error</h2>
-
-<br />
-
-<br />
-
-
-<button @onclick="Save" disabled=@_canNotUpload>Hochladen</button>
-
-
-@foreach (var audio in _audioFiles)
-{
-	<h1>@audio.Title</h1>
-	<p>@audio.Filename</p>
-	<button @onclick="(e)=>Delete(audio)">Delete</button>
-}
-
-
-
+    <div class="mt-4">
+        @foreach (var audio in _audioFiles)
+        {
+            <div class="card mb-3">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="card-title">@audio.Title</h5>
+                        <p class="card-text">@audio.Filename</p>
+                    </div>
+                    <button class="btn btn-danger" @onclick="(e)=>Delete(audio)">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,1 +1,24 @@
-﻿
+﻿/* Custom styles for Audio.razor */
+.container {
+    max-width: 600px;
+}
+
+.card {
+    border: 1px solid #ddd;
+}
+
+.card-title {
+    font-size: 1.25rem;
+}
+
+.card-text {
+    font-size: 1rem;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+hr.my-4 {
+    border-top: 1px solid #ddd;
+}
