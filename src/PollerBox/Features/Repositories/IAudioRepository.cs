@@ -2,9 +2,10 @@
 
 namespace PollerBox.Features.Repositories;
 
-public interface IAudioRepository
+public interface IAudioRepository : IBaseRepository
 {
+    Task<AudioFile[]> GetAudiosAsync();
     Task<AudioFile> GetAudioAsync(string audioId);
-    Task SaveAudioAsync(AudioFile audio);
-    Task DeleteAudioAsync(string audioId);
+    Task<bool> SaveAudioAsync(AudioFile track, Stream dataStream);
+    Task<bool> DeleteAudioAsync(AudioFile audio);
 }
