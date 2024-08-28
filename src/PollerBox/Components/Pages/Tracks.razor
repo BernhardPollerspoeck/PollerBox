@@ -1,5 +1,78 @@
 ﻿@page "/tracks"
+@using PollerBox.Components.Controls
+@rendermode InteractiveServer
 
-<PageTitle>tracks</PageTitle>
+<PageTitle>Tracks</PageTitle>
 
-<h1>tracks</h1>
+<div class="container mt-4">
+    <div class="form-group">
+        <div class="form-layout">
+            <div class="form-inputs">
+                <div class="mb-3">
+                    <label for="titleInput" class="form-label">Titel</label>
+                    <input type="text" id="titleInput" class="form-control" @bind="_title" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="descriptionTextarea" class="form-label">Beschreibung</label>
+                    <textarea id="descriptionTextarea" class="form-control fixed-height-textarea" @bind="_description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="playbackModeSelect" class="form-label">Wiedergabemodus</label>
+                    <select id="playbackModeSelect" class="form-select" @bind="_selectedPlaybackMode">
+                        @foreach (var mode in _playbackModes)
+                        {
+                            <option value="@mode">@mode</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group image-button-group">
+                <div class="image-preview-container">
+                    <img src="@_imagePreview" class="img-fluid" />
+                </div>
+                <button class="btn btn-primary" onclick="document.getElementById('imagePicker').click()">Bild wählen</button>
+                <InputFile id="imagePicker" hidden accept="image/*" OnChange="OnImageFileChanged" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-success" disabled=@CanNotSave @onclick="Save">Erstellen</button>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="mt-4">
+        @foreach (var track in _tracks)
+        {
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                        <img src="@track.Image" class="img-fluid rounded-image" />
+                    </div>
+                    <div class="col-md-8 d-flex flex-column">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@track.Title</h5>
+                            <p class="card-description">@track.Description</p>
+                            <div class="card-footer">
+                                <div class="audio-playback-info">
+                                    <small class="text-muted">@track.AudioIds.Count AudioFiles</small>
+                                    <small class="text-muted">@track.Settings.PlaybackMode</small>
+                                </div>
+                                <div class="card-buttons">
+                                    <button class="btn btn-warning" @onclick="(e) => Edit(track)">Bearbeiten</button>
+                                    <button class="btn btn-danger" @onclick="(e) => ShowDeleteConfirmation(track)">Löschen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<ConfirmationDialog @bind-IsVisible="_isDeleteDialogVisible" Title="Löschen bestätigen" Message="Möchten Sie diesen Track wirklich löschen?" OnConfirm="OnDeleteConfirmed" />

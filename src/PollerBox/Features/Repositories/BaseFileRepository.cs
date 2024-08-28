@@ -116,9 +116,16 @@ public abstract class BaseFileRepository(ILogger logger)
 	private static void EnsurePathExistence(string path)
 	{
 		path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
-		if ((File.GetAttributes(path) & FileAttributes.Directory) != FileAttributes.Directory)
+		try
 		{
-			return;
+			if ((File.GetAttributes(path) & FileAttributes.Directory) != FileAttributes.Directory)
+			{
+				return;
+			}
+		}
+		catch
+		{
+			Directory.CreateDirectory(path);
 		}
 		if (!Directory.Exists(path))
 		{

@@ -5,8 +5,8 @@ public interface ITrackRepository : IBaseRepository
 {
 	Task<Track> GetTrackAsync(string trackId);
 	Task<Track[]> GetTracksAsync();
-	Task SaveTrackAsync(Track track);
-	Task DeleteTrackAsync(Track track);
+	Task<bool> SaveTrackAsync(Track track);
+	Task<bool> DeleteTrackAsync(Track track);
 	Task AddAudioFile(string trackId, string audioId);
 	Task RemoveAudioFile(string trackId, string audioId);
 }

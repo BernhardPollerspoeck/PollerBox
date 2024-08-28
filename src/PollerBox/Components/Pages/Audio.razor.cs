@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Components.Forms;
 using PollerBox.Features.Repositories;
 using PollerBox.Models;
-using Syncfusion.Blazor.Inputs;
-using System.Diagnostics;
-using System.Text.Json;
 
 namespace PollerBox.Components.Pages;
 

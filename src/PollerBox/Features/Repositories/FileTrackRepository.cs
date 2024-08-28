@@ -12,10 +12,9 @@ public class FileTrackRepository(ILogger<FileTrackRepository> logger)
 		await SaveTrackAsync(track);
 	}
 
-	public Task DeleteTrackAsync(Track track)
+	public Task<bool> DeleteTrackAsync(Track track)
 	{
-		DeleteFile(Constants.TRACKS_PATH, track);
-		return Task.CompletedTask;
+		return Task.FromResult(DeleteFile(Constants.TRACKS_PATH, track));
 	}
 
 	public Task<Track> GetTrackAsync(string trackId)
@@ -37,7 +36,7 @@ public class FileTrackRepository(ILogger<FileTrackRepository> logger)
 		await SaveTrackAsync(track);
 	}
 
-	public Task SaveTrackAsync(Track track)
+	public Task<bool> SaveTrackAsync(Track track)
 	{
 		return SaveFile(Constants.TRACKS_PATH, track);
 	}

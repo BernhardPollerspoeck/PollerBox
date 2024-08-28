@@ -1,0 +1,55 @@
+﻿@code {
+	[Parameter]
+	public string Title { get; set; } = "Bestätigen";
+
+	[Parameter]
+	public string Message { get; set; } = "Sind sie sicher?";
+
+	[Parameter]
+	public EventCallback<bool> OnConfirm { get; set; }
+
+	private bool _isVisible;
+
+	[Parameter]
+#pragma warning disable BL0007
+	public bool IsVisible
+#pragma warning restore BL0007
+	{
+		get => _isVisible;
+		set
+		{
+			if (_isVisible != value)
+			{
+				_isVisible = value;
+				IsVisibleChanged.InvokeAsync(value);
+			}
+		}
+	}
+
+	[Parameter]
+	public EventCallback<bool> IsVisibleChanged { get; set; }
+
+	private async Task Confirm(bool value)
+	{
+		await OnConfirm.InvokeAsync(value);
+		IsVisible = false; // Hide the dialog after confirmation
+	}
+}
+
+<div class="modal" tabindex="-1" style="display:@(IsVisible ? "block" : "none")">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">@Title</h5>
+				<button type="button" class="btn-close" @onclick="() => Confirm(false)"></button>
+			</div>
+			<div class="modal-body">
+				<p>@Message</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" @onclick="() => Confirm(false)">Abbrechen</button>
+				<button type="button" class="btn btn-danger" @onclick="() => Confirm(true)">Löschen</button>
+			</div>
+		</div>
+	</div>
+</div>

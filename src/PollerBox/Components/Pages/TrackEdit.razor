@@ -1,0 +1,19 @@
+﻿@page "/trackedit/{trackId}"
+
+
+
+
+<h3>Edit Track</h3>
+
+@if (_track != null)
+{
+	<div>
+		<p>Title: @_track.Title</p>
+		<p>Description: @_track.Description</p>
+		<!-- Add more fields as needed -->
+	</div>
+}
+else
+{
+	<p>Loading...</p>
+}
