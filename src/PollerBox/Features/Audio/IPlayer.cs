@@ -1,6 +1,6 @@
 ﻿namespace PollerBox.Features.Audio;
 
-internal interface IPlayer
+public interface IPlayer
 {
 	bool IsPlaying { get; }
 

@@ -2,7 +2,6 @@ using PollerBox.Components;
 using PollerBox.Features.Audio;
 using PollerBox.Features.Repositories;
 using PollerBox.Features.Spi;
-using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +17,6 @@ builder.AddAudioPlayer();
 
 builder.Services.AddTransient<IAudioRepository, FileAudioRepository>();
 builder.Services.AddTransient<ITrackRepository, FileTrackRepository>();
-
-builder.Services.AddSyncfusionBlazor();
 
 var app = builder.Build();
 

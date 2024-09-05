@@ -1,2 +1,174 @@
-﻿body {
+﻿/* Custom CSS for Tracks.razor */
+
+/* Add margin to the bottom of the image preview */
+.img-fluid {
+    margin-bottom: 1rem;
+}
+
+/* Add custom styling for the card component */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Add padding to the card body */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Style the card title */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Style the card text */
+.card-text {
+    margin-bottom: 0.75rem;
+}
+
+/* Style the small text in the card */
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Add custom styling for the form group */
+.form-group {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 0.75rem; /* Reduced padding */
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+/* Style the image preview container */
+.image-preview-container {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    width: 256px;
+    height: 256px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    padding: 0; /* No padding */
+}
+
+/* Style the separator */
+.separator {
+    border-top: 2px solid #dee2e6;
+    margin: 2rem 0;
+}
+
+/* Center and add margin to the image in the list item */
+.card .img-fluid {
+    display: block;
+    margin: 0 auto 1rem auto;
+}
+
+/* Style the card title and description */
+.card-title {
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    margin-bottom: 1rem;
+}
+
+/* Style the audio files and playback mode */
+.audio-playback-info {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Style the buttons in the card */
+.card-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto; /* Pushes the buttons to the bottom */
+}
+
+/* Fix the height of the description textarea */
+.fixed-height-textarea {
+    height: 100px;
+}
+
+/* New styles for the form layout */
+.form-layout {
+    display: flex;
+    gap: 2rem; /* Add spacing between form groups */
+}
+
+    .form-layout .form-inputs {
+        flex: 2;
+    }
+
+    .form-layout .image-button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+.image-button-group .form-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rounded-image {
+    border-radius: 12px; /* Adjust the radius as needed */
+}
+
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Styles for the modal dialog */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    background: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    max-width: 500px;
+    width: 100%;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: 1rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    border-top: 1px solid #dee2e6;
 }

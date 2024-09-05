@@ -6,5 +6,5 @@ public record Track(
     string Description,
     string Image,
     List<string> AudioIds,
-    TrackSettings Settings) : IIdObject;
+	PlaybackMode PlaybackMode) : IIdObject;
 

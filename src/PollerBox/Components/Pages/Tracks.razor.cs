@@ -18,11 +18,11 @@ public partial class Tracks
 	private Track[] _tracks = [];
 	private readonly PlaybackMode[] _playbackModes =
 	[
+		PlaybackMode.Sequential,
+		PlaybackMode.Random,
 		PlaybackMode.RandomNoRepeat,
-			PlaybackMode.Random,
-			PlaybackMode.Sequential,
-		];
-	private PlaybackMode _selectedPlaybackMode = PlaybackMode.RandomNoRepeat;
+	];
+	private PlaybackMode _selectedPlaybackMode = PlaybackMode.Sequential;
 	private bool _isDeleteDialogVisible;
 	private Track? _trackToDelete;
 
@@ -43,8 +43,7 @@ public partial class Tracks
 				_description!,
 				_imagePreview!,
 				[],
-				new TrackSettings(
-					_selectedPlaybackMode))))
+				_selectedPlaybackMode)))
 		{
 			_title = null;
 			_description = null;
